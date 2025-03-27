@@ -19,6 +19,6 @@ public class Dosen21 {
         } else{
             System.out.println("Jenis Kelamin\t : Wanita" );
         }
-        System.out.println("Usia\t\t : " ++ usia);
+        System.out.println("Usia\t\t : " + usia);
     }
 }
