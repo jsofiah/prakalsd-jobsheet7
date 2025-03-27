@@ -24,61 +24,84 @@ public class DataDosen21 {
     }
 
     int sequentialSearching(String cari){
+        int hitung = 0;
         int posisi = -1;
         for (int j = 0; j < dataDosen.length; j++) {
             if(dataDosen[j].nama.equalsIgnoreCase(cari)){
                 posisi = j;
-                break;
+                hitung++;
             }
+        }
+        if (hitung == 0){
+            System.out.println("Data dosen dengan nama " + cari + " tidak ditemukan.");
+        } else if (hitung > 1) {
+            System.out.println("Peringatan: Ada " + hitung + " dosen dengan nama yang sama.");
         }
         return posisi;
     }
-    void tampilPosisi(String x, int pos){
-        if(pos != -1){
-            System.out.println("Data dosen dengan nama " + x + " ditemukan pada indeks " + pos);
-        } else{
-            System.out.println("Data dosen dengan nama " + x + " tidak ditemukan");
-        }
-    }
 
-    void tampilDataSearch(String x, int pos){
-        if(pos != -1){
-            dataDosen[pos].tampilInformasi();
-        } else{
-            System.out.println("Data dosen dengan nama " + x + " tidak ditemukan");
+    void tampilDataSearch(String x){
+        boolean ditemukan = false;
+        for (int j = 0; j < dataDosen.length; j++) {
+            if (dataDosen[j].nama.equalsIgnoreCase(x)) {
+                dataDosen[j].tampilInformasi();
+                System.out.println("===========================================");
+                ditemukan = true;
+            }
+        }
+        if (!ditemukan) {
+            System.out.println("Data dosen dengan nama " + x + " tidak ditemukan.");
         }
     }
 
     int findBinarySearch(int cari, int left, int right){
-        int mid;
-        if (right >= left){
+        int mid, firstPos = -1, hitung = 0;
+        while (left <= right){
             mid = (left + right) / 2;
             if( cari == dataDosen[mid].usia){
-                return mid;
+                firstPos = mid;
+                for (int i = mid; i >= 0 && cari == dataDosen[i].usia; i--) {
+                    hitung++;
+                }
+                for (int i = mid + 1; i < idx && cari == dataDosen[i].usia; i++) {
+                    hitung++;
+                }
+                break;
             }
             else if( dataDosen[mid].usia > cari){
-                return findBinarySearch(cari, left, mid-1);
+                right = mid - 1;
             }
             else{
-                return findBinarySearch(cari, mid+1, right);
+                left = mid + 1;
             }
         }
-        return -1;
+        if(firstPos == -1){
+            return -1;
+        }
+        return firstPos;
     }
 
-    void tampilPosisi2(int x, int pos){
-        if(pos != -1){
-            System.out.println("Data dosen dengan usia " + x + " ditemukan pada indeks " + pos);
-        } else{
-            System.out.println("Data dosen dengan usia " + x + " tidak ditemukan");
-        }
-    }
 
     void tampilDataSearch2(int x, int pos){
-        if(pos != -1){
-            dataDosen[pos].tampilInformasi();
-        } else{
+        if(pos == -1){
             System.out.println("Data dosen dengan usia " + x + " tidak ditemukan");
+            return;
+        }
+
+        int hitung = 0;
+        for (int i = pos; i >= 0 && dataDosen[i].usia == x; i--) {
+            dataDosen[i].tampilInformasi();
+            System.out.println("===========================================");
+            hitung++;
+        }
+        for (int i = pos + 1; i < idx && dataDosen[i].usia == x; i++) {
+            dataDosen[i].tampilInformasi();
+            System.out.println("===========================================");
+            hitung++;
+        }
+
+        if(hitung > 1){
+            System.out.println("Peringatan: Ada " + hitung + " dosen dengan usia yang sama.");
         }
     }
 }

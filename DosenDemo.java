@@ -10,7 +10,7 @@ public class DosenDemo {
         Dosen21 d5 = new Dosen21("005", "Kenan", true, 45);
         Dosen21 d6 = new Dosen21("006", "Betty", false, 50);
         Dosen21 d7 = new Dosen21("007", "Clara", false, 56);
-        Dosen21 d8 = new Dosen21("008", "Jono", true, 59);
+        Dosen21 d8 = new Dosen21("008", "Dono", true, 56);
         Dosen21 d9 = new Dosen21("009", "Dono", true, 60);
         Dosen21 d10 = new Dosen21("010", "Alza", false, 70);
 
@@ -43,9 +43,9 @@ public class DosenDemo {
         System.out.println("===========================================");
         double posisi = list.sequentialSearching(cari);
         int pss = (int) posisi;
-        list.tampilPosisi(cari, pss);
-        list.tampilDataSearch(cari, pss);
+        list.tampilDataSearch(cari);
 
+        //Melakukan pencarian data binary
         System.out.println("===========================================");
         System.out.println("\t\t Pencarian Data");
         System.out.println("===========================================");
@@ -56,9 +56,7 @@ public class DosenDemo {
         System.out.println("===========================================");
         System.out.println("\t\t Binary Search");
         System.out.println("===========================================");
-        double posisi2 = list.findBinarySearch(cari2, 0, list.idx-1);
-        int pss2 = (int) posisi2;
-        list.tampilPosisi2(cari2, pss2);
+        int pss2 = list.findBinarySearch(cari2, 0, list.idx-1);
         list.tampilDataSearch2(cari2, pss2);
     }
 }
